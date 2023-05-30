@@ -1,11 +1,6 @@
 import MsgPackEditor from "../dist/index.js";
-import { readFileSync, writeFileSync } from "fs";
+import { readFileSync } from "fs";
 
-const { data, schema } = MsgPackEditor.deserialize(readFileSync("D:/Dev/JS/unzip/input/header"));
+const editor = MsgPackEditor.deserialize(readFileSync("data/test.msgpack"));
 
-console.log(data);
-writeFileSync("output-data.json", JSON.stringify(data, (k, v) => {
-  if(typeof v === "bigint") return v.toString();
-  return v;
-}, 2));
-writeFileSync("output-schema.json", JSON.stringify(schema, null, 2));
+console.log(editor.serialize().length);
