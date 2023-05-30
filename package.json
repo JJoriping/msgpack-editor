@@ -1,0 +1,15 @@
+{
+  "type": "module",
+  "name": "msgpack-editor",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "description": "뫙뫙이 바보",
+  "scripts": {
+    "watch": "tsc -w"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.5",
+    "typescript": "^5.0.4"
+  }
+}
