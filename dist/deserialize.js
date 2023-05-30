@@ -112,7 +112,10 @@ export default function deserialize(reader) {
             dataList.push(data);
             schemaList.push(schema);
         }
-        return { data: dataList, schema: { type: "array8", items: schemaList } };
+        return {
+            data: Object.assign(dataList, { '$items': schemaList }),
+            schema: { type: "array8", items: schemaList }
+        };
     }
     if (c === 0xDC) {
         const l = constructNumber(reader.readBytes(2));
@@ -123,7 +126,10 @@ export default function deserialize(reader) {
             dataList.push(data);
             schemaList.push(schema);
         }
-        return { data: dataList, schema: { type: "array16", items: schemaList } };
+        return {
+            data: Object.assign(dataList, { '$items': schemaList }),
+            schema: { type: "array16", items: schemaList }
+        };
     }
     if (c === 0xDD) {
         const l = constructNumber(reader.readBytes(4));
@@ -134,7 +140,10 @@ export default function deserialize(reader) {
             dataList.push(data);
             schemaList.push(schema);
         }
-        return { data: dataList, schema: { type: "array32", items: schemaList } };
+        return {
+            data: Object.assign(dataList, { '$items': schemaList }),
+            schema: { type: "array32", items: schemaList }
+        };
     }
     if ((c & 240) === 128) {
         const l = c & 0b1111;
@@ -146,6 +155,7 @@ export default function deserialize(reader) {
             data[keyData] = valueData;
             entries.push([keySchema, valueSchema]);
         }
+        data['$entries'] = entries;
         return { data, schema: { type: "map8", entries } };
     }
     if (c === 0xDE) {
@@ -158,6 +168,7 @@ export default function deserialize(reader) {
             data[keyData] = valueData;
             entries.push([keySchema, valueSchema]);
         }
+        data['$entries'] = entries;
         return { data, schema: { type: "map16", entries } };
     }
     if (c === 0xDF) {
@@ -170,6 +181,7 @@ export default function deserialize(reader) {
             data[keyData] = valueData;
             entries.push([keySchema, valueSchema]);
         }
+        data['$entries'] = entries;
         return { data, schema: { type: "map32", entries } };
     }
     throw Error(`Unhandled byte '${c}' at position ${offset}`);

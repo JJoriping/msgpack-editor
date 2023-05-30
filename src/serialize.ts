@@ -106,6 +106,7 @@ export default function serialize(data:any, schema:MsgPackSchema):Buffer{
       }
       break;
     case "map8":{
+      delete data['$entries'];
       const entries = Object.entries(data);
 
       R.push(0b1000_0000 | entries.length);
@@ -117,6 +118,7 @@ export default function serialize(data:any, schema:MsgPackSchema):Buffer{
       }
     } break;
     case "map16":{
+      delete data['$entries'];
       const entries = Object.entries(data);
 
       R.push(0xDE, ...destructNumber(entries.length, 2));
@@ -128,6 +130,7 @@ export default function serialize(data:any, schema:MsgPackSchema):Buffer{
       }
     } break;
     case "map32":{
+      delete data['$entries'];
       const entries = Object.entries(data);
 
       R.push(0xDF, ...destructNumber(entries.length, 4));
