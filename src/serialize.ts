@@ -56,19 +56,22 @@ export default function serialize(data:any, schema:MsgPackSchema):Buffer{
       buffer.writeDoubleBE(data);
       R.push(0xCB, ...buffer);
     } break;
-    case "string8":
+    case "string8":{
       if(!assertString(data)) break;
-      if(schema.short) R.push(0b1010_0000 | data.length, ...Buffer.from(data));
-      else R.push(0xD9, data.length, ...Buffer.from(data));
-      break;
-    case "string16":
+      const buffer = Buffer.from(data);
+      if(schema.short) R.push(0b1010_0000 | buffer.byteLength, ...buffer);
+      else R.push(0xD9, buffer.byteLength, ...buffer);
+    } break;
+    case "string16":{
       if(!assertString(data)) break;
-      R.push(0xDA, ...destructNumber(data.length, 2), ...Buffer.from(data));
-      break;
-    case "string32":
+      const buffer = Buffer.from(data);
+      R.push(0xDA, ...destructNumber(buffer.byteLength, 2), ...buffer);
+    } break;
+    case "string16":{
       if(!assertString(data)) break;
-      R.push(0xDB, ...destructNumber(data.length, 4), ...Buffer.from(data));
-      break;
+      const buffer = Buffer.from(data);
+      R.push(0xDB, ...destructNumber(buffer.byteLength, 4), ...buffer);
+    } break;
     case "binary8":
       if(!assertBuffer(data)) break;
       R.push(0xC4, data.length, ...data);
