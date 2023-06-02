@@ -9,9 +9,11 @@ export type MsgPackSchema = {
   'type': "float32"|"float64"
 }|{
   'type': "string8",
-  'short'?: boolean
+  'short'?: boolean,
+  'value'?: string
 }|{
-  'type': "string16"|"string32"
+  'type': "string16"|"string32",
+  'value'?: string
 }|{
   'type': "binary8"|"binary16"|"binary32"
 }|{

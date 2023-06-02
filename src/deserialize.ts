@@ -181,6 +181,9 @@ export default function deserialize(reader:BufferReader):{ data: any, schema: Ms
       const { data: valueData, schema: valueSchema } = deserialize(reader);
 
       data[keyData] = valueData;
+      if(keySchema.type.startsWith("string")){
+        Object.assign(keySchema, { value: keyData });
+      }
       entries.push([ keySchema, valueSchema ]);
     }
     data['$entries'] = entries;
@@ -196,6 +199,9 @@ export default function deserialize(reader:BufferReader):{ data: any, schema: Ms
       const { data: valueData, schema: valueSchema } = deserialize(reader);
 
       data[keyData] = valueData;
+      if(keySchema.type.startsWith("string")){
+        Object.assign(keySchema, { value: keyData });
+      }
       entries.push([ keySchema, valueSchema ]);
     }
     data['$entries'] = entries;
@@ -211,6 +217,9 @@ export default function deserialize(reader:BufferReader):{ data: any, schema: Ms
       const { data: valueData, schema: valueSchema } = deserialize(reader);
 
       data[keyData] = valueData;
+      if(keySchema.type.startsWith("string")){
+        Object.assign(keySchema, { value: keyData });
+      }
       entries.push([ keySchema, valueSchema ]);
     }
     data['$entries'] = entries;

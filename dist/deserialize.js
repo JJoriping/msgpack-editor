@@ -153,6 +153,9 @@ export default function deserialize(reader) {
             const { data: keyData, schema: keySchema } = deserialize(reader);
             const { data: valueData, schema: valueSchema } = deserialize(reader);
             data[keyData] = valueData;
+            if (keySchema.type.startsWith("string")) {
+                Object.assign(keySchema, { value: keyData });
+            }
             entries.push([keySchema, valueSchema]);
         }
         data['$entries'] = entries;
@@ -166,6 +169,9 @@ export default function deserialize(reader) {
             const { data: keyData, schema: keySchema } = deserialize(reader);
             const { data: valueData, schema: valueSchema } = deserialize(reader);
             data[keyData] = valueData;
+            if (keySchema.type.startsWith("string")) {
+                Object.assign(keySchema, { value: keyData });
+            }
             entries.push([keySchema, valueSchema]);
         }
         data['$entries'] = entries;
@@ -179,6 +185,9 @@ export default function deserialize(reader) {
             const { data: keyData, schema: keySchema } = deserialize(reader);
             const { data: valueData, schema: valueSchema } = deserialize(reader);
             data[keyData] = valueData;
+            if (keySchema.type.startsWith("string")) {
+                Object.assign(keySchema, { value: keyData });
+            }
             entries.push([keySchema, valueSchema]);
         }
         data['$entries'] = entries;
