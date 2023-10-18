@@ -6,7 +6,8 @@
   "license": "MIT",
   "description": "뫙뫙이 바보",
   "scripts": {
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "build": "tsc"
   },
   "devDependencies": {
     "@types/node": "^20.2.5",
